@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class MiniTabBarItem {
+@objc public class MiniTabBarItem: NSObject {
     var title: String?
     var icon: UIImage?
     var customView: UIView?
@@ -25,11 +25,11 @@ public class MiniTabBarItem {
     }
 }
 
-public protocol MiniTabBarDelegate: class {
+@objc public protocol MiniTabBarDelegate: class {
     func tabSelected(_ index: Int)
 }
 
-public class MiniTabBar: UIView {
+@objc public class MiniTabBar: UIView {
     
     public weak var delegate: MiniTabBarDelegate?
     public let keyLine = UIView()
@@ -102,7 +102,7 @@ public class MiniTabBar: UIView {
         self.selectItem(selectedIndex)
     }
     
-    public func selectItem(_ selectedIndex: Int, animated: Bool = true) {
+    @objc public func selectItem(_ selectedIndex: Int, animated: Bool = true) {
         if !self.itemViews[selectedIndex].item.selectable {
             return
         }
