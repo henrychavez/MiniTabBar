@@ -87,7 +87,7 @@ class MiniTabBarItemView: UIView {
             /*
             ICON
             */
-            UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(), animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.iconView.frame.origin.y = 8
             })
             
@@ -109,7 +109,7 @@ class MiniTabBarItemView: UIView {
             /*
              ICON
              */
-            UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.iconView.frame.origin.y = 6
             })
 
