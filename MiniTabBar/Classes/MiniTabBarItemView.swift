@@ -15,6 +15,7 @@ class MiniTabBarItemView: UIView {
     let iconView = UIImageView()
     
     private var selected = false
+    private let defaultInactiveColor = UIColor(white: 0.6, alpha: 1.0)
     
     override var tintColor: UIColor! {
         didSet {
@@ -28,8 +29,8 @@ class MiniTabBarItemView: UIView {
     public var inactiveColor: UIColor! {
         didSet {
             if !self.selected {
-                self.iconView.tintColor = self.inactiveColor
-                self.titleLabel.textColor = self.inactiveColor
+                self.iconView.tintColor = self.inactiveColor ?? defaultInactiveColor
+                self.titleLabel.textColor = self.inactiveColor ?? defaultInactiveColor
             }
         }
     }
@@ -76,48 +77,14 @@ class MiniTabBarItemView: UIView {
             customView.center = CGPoint(x: self.frame.width / 2 + self.item.offset.horizontal,
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
-            titleLabel.font = UIFont.systemFont(ofSize: self.selected ? 14 : 12)
-            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 24, width: self.frame.width, height: 14)
-            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.selected ? 6 : 8, width: 24, height: 24)
-        }
-    }
-    
-    func setDeselected(_ deselected: Bool, animated: Bool = true) {
-        if (animated && deselected) {
-            /*
-            ICON
-            */
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.iconView.frame.origin.y = 8
-            })
-            
-            /*
-            TITLE
-            */
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.font = UIFont.systemFont(ofSize: 12)
-            })
+            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 20, width: self.frame.width, height: 12)
+            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: 6, width: 24, height: 24)
         }
     }
     
     func setSelected(_ selected: Bool, animated: Bool = true) {
         self.selected = selected
-        self.iconView.tintColor = selected ? self.tintColor : UIColor(white: 0.6, alpha: 1.0)
-        
-        if (animated && selected) {
-            /*
-             ICON
-             */
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.iconView.frame.origin.y = 6
-            })
-
-            /*
-             TITLE
-             */
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.font = UIFont.systemFont(ofSize: 14)
-            })
-        }
+        self.iconView.tintColor = selected ? self.tintColor : self.inactiveColor
+        self.titleLabel.textColor = selected ? self.tintColor : self.inactiveColor
     }
 }
