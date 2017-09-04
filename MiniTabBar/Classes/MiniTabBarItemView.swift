@@ -20,10 +20,20 @@ class MiniTabBarItemView: UIView {
         didSet {
             if self.selected {
                 self.iconView.tintColor = self.tintColor
+                self.titleLabel.textColor = self.tintColor
             }
-            self.titleLabel.textColor = self.tintColor
         }
     }
+    
+    public var inactiveColor: UIColor! {
+        didSet {
+            if !self.selected {
+                self.iconView.tintColor = self.inactiveColor
+                self.titleLabel.textColor = self.inactiveColor
+            }
+        }
+    }
+    
     private let defaultFont = UIFont.systemFont(ofSize: 12)
     var font: UIFont? {
         didSet {
@@ -66,8 +76,10 @@ class MiniTabBarItemView: UIView {
             customView.center = CGPoint(x: self.frame.width / 2 + self.item.offset.horizontal,
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
-            titleLabel.frame = CGRect(x: 0, y: self.selected ? self.frame.size.height - 24 : self.frame.height, width: self.frame.width, height: 14)
-            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.selected ? 6 :self.frame.height / 2 - 12, width: 24, height: 24)
+            let titleSize =  self.selected ? 14 : 12
+            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 24, width: self.frame.width, height: titleSize)
+            titleLabel.font = UIFont.systemFont(ofSize: titleSize)
+            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.selected ? 6 : 8, width: 24, height: 24)
         }
     }
     
@@ -77,14 +89,15 @@ class MiniTabBarItemView: UIView {
             ICON
             */
             UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.iconView.frame.origin.y = self.frame.size.height / 2 - 12
+                self.iconView.frame.origin.y = 8
             })
             
             /*
             TITLE
             */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.frame.origin.y = self.frame.size.height
+                self.titleLabel.frame.height = 12
+                self.titleLabel.font = UIFont.systemFont(ofSize: 12)
             })
         }
     }
@@ -100,13 +113,13 @@ class MiniTabBarItemView: UIView {
             UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animations: {
                 self.iconView.frame.origin.y = 6
             })
-            
-            
+
             /*
              TITLE
              */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.frame.origin.y = self.frame.size.height - 24
+                self.titleLabel.frame.height = 14
+                self.titleLabel.font = UIFont.systemFont(ofSize: 14)
             })
         }
     }
