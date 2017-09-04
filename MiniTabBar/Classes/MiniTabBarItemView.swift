@@ -95,8 +95,8 @@ class MiniTabBarItemView: UIView {
             TITLE
             */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.frame.size.height = 12
                 self.titleLabel.font = UIFont.systemFont(ofSize: 12)
+                self.titleLabel.frame.size.height = 12
             })
         }
     }
@@ -117,8 +117,8 @@ class MiniTabBarItemView: UIView {
              TITLE
              */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.frame.size.height = 14
                 self.titleLabel.font = UIFont.systemFont(ofSize: 14)
+                self.titleLabel.frame.size.height = 14
             })
         }
     }
