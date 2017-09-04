@@ -99,10 +99,6 @@ class MiniTabBarItemView: UIView {
              */
             UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animations: {
                 self.iconView.frame.origin.y = 6
-            }, completion: { finished in
-                UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions(), animations: {
-                    self.iconView.frame.origin.y = self.frame.size.height / 2 - 12
-                })
             })
             
             
