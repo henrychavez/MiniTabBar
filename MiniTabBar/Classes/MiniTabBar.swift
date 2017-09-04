@@ -120,7 +120,6 @@ import UIKit
         }
         
         for (index, v) in self.itemViews.enumerated() {
-            v.setDeselected((index == self.currentSelectedIndex), animated: animated);
             v.setSelected((index == selectedIndex), animated: animated)
         }
         
