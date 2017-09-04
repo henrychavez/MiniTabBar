@@ -77,7 +77,7 @@ class MiniTabBarItemView: UIView {
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
             titleLabel.font = UIFont.systemFont(ofSize: self.selected ? 14 : 12)
-            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 24, width: self.frame.width, height: self.selected ? 14 : 12)
+            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 24, width: self.frame.width, height: 14)
             iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.selected ? 6 : 8, width: 24, height: 24)
         }
     }
@@ -96,7 +96,6 @@ class MiniTabBarItemView: UIView {
             */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.titleLabel.font = UIFont.systemFont(ofSize: 12)
-                self.titleLabel.frame.size.height = 12
             })
         }
     }
@@ -118,7 +117,6 @@ class MiniTabBarItemView: UIView {
              */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.titleLabel.font = UIFont.systemFont(ofSize: 14)
-                self.titleLabel.frame.size.height = 14
             })
         }
     }
