@@ -71,6 +71,24 @@ class MiniTabBarItemView: UIView {
         }
     }
     
+    func setDeselected(_ deselected: Bool, animated: Bool = true) {
+        if (animated && deselected) {
+            /*
+            ICON
+            */
+            UIView.animate(withDuration: 0.15, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.iconView.frame.origin.y = self.frame.size.height / 2 - 12
+            })
+            
+            /*
+            TITLE
+            */
+            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.titleLabel.frame.origin.y = self.frame.size.height
+            })
+        }
+    }
+    
     func setSelected(_ selected: Bool, animated: Bool = true) {
         self.selected = selected
         self.iconView.tintColor = selected ? self.tintColor : UIColor(white: 0.6, alpha: 1.0)
@@ -89,14 +107,10 @@ class MiniTabBarItemView: UIView {
             
             
             /*
-             TEXT
+             TITLE
              */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.titleLabel.frame.origin.y = self.frame.size.height - 24
-            }, completion: { finished in
-                UIView.animate(withDuration: 0.2, delay: 0.5, options: UIViewAnimationOptions(), animations: {
-                    self.titleLabel.frame.origin.y = self.frame.size.height
-                })
             })
         }
     }
