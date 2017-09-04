@@ -67,7 +67,7 @@ class MiniTabBarItemView: UIView {
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
             titleLabel.frame = CGRect(x: 0, y: self.frame.height, width: self.frame.width, height: 14)
-            iconView.frame = CGRect(x: self.frame.width / 2 - 13, y: 12, width: 26, height: 20)
+            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.frame.height / 2 - 12, width: 24, height: 24)
         }
     }
     
@@ -83,7 +83,7 @@ class MiniTabBarItemView: UIView {
                 self.iconView.frame.origin.y = 5
             }, completion: { finished in
                 UIView.animate(withDuration: 0.4, delay: 0.5, options: UIViewAnimationOptions(), animations: {
-                    self.iconView.frame.origin.y = 12
+                    self.iconView.frame.origin.y = self.frame.size.height / 2 - 12
                 })
             })
             
@@ -92,7 +92,7 @@ class MiniTabBarItemView: UIView {
              TEXT
              */
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions(), animations: {
-                self.titleLabel.frame.origin.y = 28
+                self.titleLabel.frame.origin.y = self.frame.size.height - 10
             }, completion: { finished in
                 UIView.animate(withDuration: 0.2, delay: 0.5, options: UIViewAnimationOptions(), animations: {
                     self.titleLabel.frame.origin.y = self.frame.size.height
