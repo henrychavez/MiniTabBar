@@ -67,7 +67,7 @@ class MiniTabBarItemView: UIView {
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
             titleLabel.frame = CGRect(x: 0, y: self.selected ? self.frame.size.height - 24 : self.frame.height, width: self.frame.width, height: 14)
-            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.frame.height / 2 - 12, width: 24, height: 24)
+            iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: self.selected ? 6 :self.frame.height / 2 - 12, width: 24, height: 24)
         }
     }
     
