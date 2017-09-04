@@ -109,13 +109,13 @@ import UIKit
         if (selectedIndex == self.currentSelectedIndex) {
             return
         }
-        self.currentSelectedIndex = selectedIndex
         
         for (index, v) in self.itemViews.enumerated() {
             v.setDeselected((index == self.currentSelectedIndex), animated: animated);
             v.setSelected((index == selectedIndex), animated: animated)
         }
         
+        self.currentSelectedIndex = selectedIndex
         self.delegate?.tabSelected(selectedIndex)
     }
 }
