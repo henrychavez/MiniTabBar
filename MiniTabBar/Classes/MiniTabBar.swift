@@ -26,28 +26,30 @@ import UIKit
 }
 
 @objc public protocol MiniTabBarDelegate: class {
-    func tabSelected(_ index: Int)
+    func onTabSelected(_ index: Int)
 }
 
 @objc public class MiniTabBar: UIView {
     
     public weak var delegate: MiniTabBarDelegate?
     public let keyLine = UIView()
+
     public override var tintColor: UIColor! {
         didSet {
-            for itv in self.itemViews {
-                itv.tintColor = self.tintColor
+            for (index, v) in self.itemViews.enumerated() {
+                v.setSelected((index == self.currentSelectedIndex), animated: true)
             }
         }
     }
     
     public var inactiveColor: UIColor! {
         didSet {
-            for itv in self.itemViews {
-                itv.inactiveColor = self.inactiveColor
+            for (index, v) in self.itemViews.enumerated() {
+                v.setSelected((index == self.currentSelectedIndex), animated: true)
             }
         }
     }
+
     
     public var font: UIFont? {
         didSet {
@@ -70,23 +72,43 @@ import UIKit
     public init(items: [MiniTabBarItem]) {
         super.init(frame: CGRect.zero)
         
-        self.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
+        //self.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
         
         self.addSubview(visualEffectView)
         
         keyLine.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         self.addSubview(keyLine)
         
+        self.initTabs(items)
+    }
+    
+    public func setTabs(_ tabs: [MiniTabBarItem]) {
+        for v in self.subviews {
+            v.removeFromSuperview()
+        }
+        
+        self.addSubview(visualEffectView)
+        
+        self.itemViews = [MiniTabBarItemView]()
+        
+        self.addSubview(keyLine)
+        
+        self.initTabs(tabs)
+    }
+    
+    private func initTabs(_ tabs: [MiniTabBarItem]) {
         var i = 0
-        for item in items {
-            let itemView = MiniTabBarItemView(item)
-            itemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiniTabBar.itemTapped(_:))))
-            self.itemViews.append(itemView)
-            self.addSubview(itemView)
+        for tab in tabs {
+            let tabView = MiniTabBarItemView(tab, self)
+            tabView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiniTabBar.itemTapped(_:))))
+            self.itemViews.append(tabView)
+            self.addSubview(tabView)
             i += 1
         }
         
-        self.selectItem(0, animated: false)
+        if i != 0 {
+            self.selectItem(0, animated: false)
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -124,7 +146,7 @@ import UIKit
         }
         
         self.currentSelectedIndex = selectedIndex
-        self.delegate?.tabSelected(selectedIndex)
+        self.delegate?.onTabSelected(selectedIndex)
     }
 }
 

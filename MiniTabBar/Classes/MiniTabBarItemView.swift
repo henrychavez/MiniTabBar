@@ -10,14 +10,16 @@ import Foundation
 import UIKit
 
 class MiniTabBarItemView: UIView {
-    let item: MiniTabBarItem
-    let titleLabel = UILabel()
-    let iconView = UIImageView()
     
+    private var titleLabel = UILabel()
+    private var iconView = UIImageView()
     private var selected = false
-    private let defaultInactiveColor = UIColor(white: 0.6, alpha: 1.0)
+
+    public var item: MiniTabBarItem
     
-    override var tintColor: UIColor! {
+    public weak var parent: MiniTabBar?
+    
+    /*override var tintColor: UIColor! {
         didSet {
             if self.selected {
                 self.iconView.tintColor = self.tintColor
@@ -29,11 +31,11 @@ class MiniTabBarItemView: UIView {
     public var inactiveColor: UIColor! {
         didSet {
             if !self.selected {
-                self.iconView.tintColor = self.inactiveColor ?? defaultInactiveColor
-                self.titleLabel.textColor = self.inactiveColor ?? defaultInactiveColor
+                self.iconView.tintColor = self.inactiveColor
+                self.titleLabel.textColor = self.inactiveColor
             }
         }
-    }
+    }*/
     
     private let defaultFont = UIFont.systemFont(ofSize: 12)
     var font: UIFont? {
@@ -42,8 +44,9 @@ class MiniTabBarItemView: UIView {
         }
     }
     
-    init(_ item: MiniTabBarItem) {
+    init(_ item: MiniTabBarItem, _ parent: MiniTabBar) {
         self.item = item
+        self.parent = parent
         super.init(frame: CGRect.zero)
         
         if let customView = self.item.customView {
@@ -55,7 +58,6 @@ class MiniTabBarItemView: UIView {
             if let title = self.item.title {
                 titleLabel.text = title
                 titleLabel.font = self.defaultFont
-                titleLabel.textColor = self.tintColor
                 titleLabel.textAlignment = .center
                 self.addSubview(titleLabel)
             }
@@ -77,14 +79,14 @@ class MiniTabBarItemView: UIView {
             customView.center = CGPoint(x: self.frame.width / 2 + self.item.offset.horizontal,
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
-            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 24, width: self.frame.width, height: 12)
+            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 22, width: self.frame.width, height: 14)
             iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: 8, width: 24, height: 24)
         }
     }
     
     func setSelected(_ selected: Bool, animated: Bool = true) {
         self.selected = selected
-        self.iconView.tintColor = selected ? self.tintColor : self.inactiveColor
-        self.titleLabel.textColor = selected ? self.tintColor : self.inactiveColor
+        self.iconView.tintColor = selected ? self.parent?.tintColor : self.parent?.inactiveColor
+        self.titleLabel.textColor = selected ? self.parent?.tintColor : self.parent?.inactiveColor
     }
 }
