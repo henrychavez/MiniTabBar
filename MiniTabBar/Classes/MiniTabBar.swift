@@ -134,10 +134,13 @@ import UIKit
     }
     
     @objc public func selectItem(_ selectedIndex: Int, animated: Bool = true) {
-        if !self.itemViews[selectedIndex].item.selectable {
+        if (selectedIndex == self.currentSelectedIndex) {
             return
         }
-        if (selectedIndex == self.currentSelectedIndex) {
+        
+        self.delegate?.onTabSelected(selectedIndex)
+
+        if !self.itemViews[selectedIndex].item.selectable {
             return
         }
         
@@ -146,7 +149,6 @@ import UIKit
         }
         
         self.currentSelectedIndex = selectedIndex
-        self.delegate?.onTabSelected(selectedIndex)
     }
 }
 
