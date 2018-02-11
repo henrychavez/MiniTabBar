@@ -105,10 +105,6 @@ import UIKit
             self.addSubview(tabView)
             i += 1
         }
-        
-        if i != 0 {
-            self.selectItem(0, animated: false)
-        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
