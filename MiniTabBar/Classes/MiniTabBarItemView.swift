@@ -79,8 +79,8 @@ class MiniTabBarItemView: UIView {
             customView.center = CGPoint(x: self.frame.width / 2 + self.item.offset.horizontal,
                                         y: self.frame.height / 2 + self.item.offset.vertical)
         } else {
-            titleLabel.frame = CGRect(x: 0, y: self.frame.size.height - 22, width: self.frame.width, height: 14)
             iconView.frame = CGRect(x: self.frame.width / 2 - 12, y: 8, width: 24, height: 24)
+            titleLabel.frame = CGRect(x: 0, y: iconView.frame.size.height + 10, width: self.frame.width, height: 14)
         }
     }
     
