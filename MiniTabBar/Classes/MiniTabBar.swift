@@ -126,7 +126,7 @@ import UIKit
     @objc func itemTapped(_ gesture: UITapGestureRecognizer) {
         let itemView = gesture.view as! MiniTabBarItemView
         let selectedIndex = self.itemViews.index(of: itemView)!
-        self.selectItem(selectedIndex)
+        self.selectItem(selectedIndex, animated: true);
     }
     
     @objc public func selectItem(_ selectedIndex: Int, animated: Bool = true) {
