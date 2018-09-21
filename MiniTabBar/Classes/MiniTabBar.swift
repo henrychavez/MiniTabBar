@@ -69,7 +69,7 @@ import UIKit
     fileprivate var itemViews = [MiniTabBarItemView]()
     fileprivate var currentSelectedIndex: Int?
     
-    public override init(items: [MiniTabBarItem]) {
+    public init(items: [MiniTabBarItem]) {
         super.init(frame: CGRect.zero)
         
         //self.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
